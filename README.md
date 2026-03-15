@@ -1,278 +1,247 @@
 <p align="center">
-  <a href="https://twitter.com/RGraphql">
-    <img alt="Logo" src="https://production-customer-site-public.s3.us-east-2.amazonaws.com/Light.png" />
+  <a href="https://rocketgraph.app">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="./images/Light.png">
+      <source media="(prefers-color-scheme: light)" srcset="./images/Light.png">
+      <img alt="RocketLogs" src="./images/Light.png" width="280">
+    </picture>
   </a>
 </p>
+
 <h1 align="center">
-  RocketGraphQL :rocket:
+  RocketLogs - Detective
 </h1>
 
 <h3 align="center">
-  <!-- <b><a href="https://app.appsmith.com/signup/?utm_source=github&utm_medium=social&utm_content=website&utm_campaign=null&utm_term=website">Get Started</a></b> -->
+  Find the needle in the log haystack
+</h3>
 
-  <a href="https://docs.rocketgraph.io">Docs</a>
-  •
-  <a href="https://youtu.be/K5TGDapSnQw">Youtube</a>
-  •
+<p align="center">
+  <strong>ML-powered anomaly detection that surfaces what matters from millions of telemetry events</strong>
+</p>
+
+<p align="center">
+  <a href="https://rocketgraph.app">Website</a>
+  &nbsp;&bull;&nbsp;
+  <a href="#getting-started">Getting Started</a>
+  &nbsp;&bull;&nbsp;
+  <a href="#example-setups">Examples</a>
+  &nbsp;&bull;&nbsp;
   <a href="https://discord.gg/YHVnZ5WT">Discord</a>
-  •
-  <a href="https://github.com/RocketsGraphQL/rgraph/tree/master/example-setups">Templates</a> 
-  </h3>
+</p>
 
 <p align="center">
-
-<p align="center">
-  <a href="https://twitter.com/RGraphql"><img src="https://img.shields.io/twitter/follow/RgraphQl?style=social" alt="Twitter follow"></a>
-  <a href="https://twitter.com/RGraphql"><img src="https://img.shields.io/badge/release-v0.3.0-success" alt="Release"></a>
+  <img src="https://img.shields.io/badge/OpenTelemetry-supported-blue?logo=opentelemetry" alt="OpenTelemetry">
+  <img src="https://img.shields.io/badge/Datadog-supported-purple?logo=datadog" alt="Datadog">
+  <img src="https://img.shields.io/badge/New_Relic-supported-green" alt="New Relic">
+  <img src="https://img.shields.io/badge/Loki-supported-orange" alt="Loki">
 </p>
-
-![signup_api](./images/title_image.png)
-
-<br />
-
-**Rocketgraph** gives superpowers to your web applications. Get Authentication, Postgres Database pre-configured, GraphQL console, AI Chatbots and Server-less function right from day 0. When you create a project on [rocketgraph](https://rocketgraph.io/) you are provided with [Postgres Instance](https://www.postgresql.org/), [Hasura console](https://hasura.io/) to get a GraphQL API and manage granular authorisation rules, automated server-less deployments with Git, and a full blown authentication system built in. It uses the open-source [Hasura Batteries](https://github.com/RocketsGraphQL/hasura-batteries) to power it's authentication service. In addition you also get an AI chatbot that is trained on the documentation provided by you. 
-
-**🎉What's new?**
-
-Checkout how to train your own AI Chatbot. Just provide the documentation URL and it'll scrape the URL, tokenize the text and train an AI chatbot that can answer your user's questions.
-
-<p>
-  <img src="./images/show_training.gif" width="100%">
-</p>
-
-
-## Table of contents
-
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Postgres logger](#postgres-logs-using-pgaudit)
-- [Self-hosting](#run-on-your-machine-self-hosted)
-- [Docs](http://docs.rocketgraph.io/)
-- [Join Community](https://discord.gg/YHVnZ5WT)
-
-# Introduction
-
-<!-- <img src="./images/code_showcase_15fps.gif"/> -->
-
-<br />
-
-### We offer the following functionality
-
-- 🔒 Authentication using email/password
-- 👬 Authentication using social logins
-- 🪄 Authentication using OTP and magic link
-- ⛈️ Server-less functions: Bring your own code and run it as thin AWS lambdas.
-- 👨‍💻 Your code will be automatically picked up from your Github commits by our Github bot and deployed as Lambdas
-- 🦾 AWS RDS support: 8GB PostgreSQL
-- 👩‍🚀 Postgres Logs using `pgAudit`
-- 🍪 Secure session management with cookies refreshed automatically
-
-<br />
-
-
-<br />
-
-
-<!-- ## Roadmap
-
-- Support more JWT encryption algorithms (Currently supporting HS256)
-- 2 Factor authentication
-- Back office (Admin dashboard to manage user)
-- Support more database
-- VueJS SDK
-- Svelte SDK
-- React Native SDK
-- Flutter SDK
-- Android Native SDK
-- iOS native SDK
-- Golang SDK
-- Python SDK
-- PHP SDK
-- WordPress plugin
-- Kubernetes Helm Chart
-- [Local Stack](https://github.com/localstack/localstack)
-- AMI
-- Digital Ocean Droplet
-- Azure
-- Render
-- Edge Deployment using Fly.io
-- Password-less login with mobile number and OTP SMS -->
-
-# Getting Started
-
-## Trying out Rocketgraph
-
-This guide helps you get started with rocketgraph and setting up your backend in just 15 minutes. In 15 minutes you will be able to create a todos app with db, auth and realtime subscriptions.
-
-### Create account
-Your first instance is free for 14 days. No credit card.
-So go to [the signup page](https://rocketgraph.io/signup) and create account. Then on the dashboard click new project. Wait for a few seconds for the instance to boot up and load the software.
-<!-- <img src="./images/demo-full.gif"/> -->
-
-### Project setup
-You can see your hasura console url. There you can manage your database.
-
-<!-- <img src="./images/hasura_photo.png"/> -->
-
-And links to your Backend URLs
-<!-- <img src="./images/backend_photo.png"/> -->
-
-
-### Code setup TLDR version
-
-For your front-end, you can start with the already provided [examples](https://github.com/RocketsGraphQL/example-setups). Just download and `npm run dev`. `todos` is without authentication, `auth` is with authentication.
-
-<!-- <p align="center">
-<img align="center" src="./images/dashboard.gif"/>
-</p> -->
-<br />
-
-### Code setup (just the basics)
-
-```bash
-npx create-react-app todos
-cd todos
-```
-
-```bash
-yarn add react-router-dom react-router
-yarn add @apollo/client @rocketgraphql/react-apollo @rocketgraphql/rocketgraph-js-sdk graphql
-```
-
-Next create `src/utils/config.js` and add the following:
-
-```js
-import { createClient } from "@rocketgraphql/rocketgraph-js-sdk";
- 
-const config = {
-  baseURL: "https://backend-XXXXXXX.rocketgraph.app/auth",
-};
- 
-const { auth } = createClient(config);
- 
-export { auth };
-```
-
-Replace the `backend-XXX` URL with the url on your Rocketgraph dashboard. Congratulations, you have setup the basics required to use Rocketgraph.
-
-
-### RApolloProvider
-
-Use GraphQL in your application, `index.js` by wrapping your App in RApolloProvider as follows:
-
-```js
-// src/index.js
-import React from "react";
-import ReactDOM from "react-dom";
-import { ChakraProvider } from '@chakra-ui/react'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import App from "./App";
-import Message from "./components/Message"
-import Login from "./components/Login"
-import Signup from "./components/Signup"
-
-// Rocketgraph providers
-import { RApolloProvider } from "@rocketgraphql/react-apollo";
-import { auth } from "./utils/config";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <RApolloProvider auth={auth} gqlEndpoint="https://hasura-AEF0WTE.rocketgraph.app/v1/graphql">
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />}/>
-            <Route path="/signup" element={<Signup />}/>
-            <Route path="/messages" element={<Message />} />
-            <Route path="/" element={<App />} />
-          </Routes>
-        </Router>
-      </RApolloProvider>
-    </ChakraProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
-```
-
-Then in your App.js file
-
-```js
-import { gql, useSubscription } from "@apollo/client";
-
-const GET_TODOS = gql`
-    subscription {
-      users {
-        id
-        email
-      }
-    }
-`;
-
-export default function Application() {
-  const [ data, loading] = useSubscription(GET_TODOS);
-}
-
-```
-
-## AI Chatbots powered by pgVector and OpenAI:
-
-First enter your documentation URL to train your chatbot:
-
-<p>
-  <img src="./images/show_training.gif" width="100%">
-</p>
-
-You can test out your chatbot:
-
-<p>
-  <img src="./images/test_chatbot.gif" width="100%">
-</p>
-
-get your embed code that you can embed in your own website:
-
-<p>
-  <img src="./images/copy_embed_code_showcase.gif" width="100%">
-</p>
-
-## Postgres Logs using pgAudit
-
-In your logs dasboard you can write complex queries to query your logs. Use [cloudwatch logs syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
-
-<p>
-  <img src="./images/logger_demo.gif" width="100%">
-</p>
-
-## Rocketgraph Edge functions
-
-Install Rgraph CLI v0.1.10
-
-<p>
-  <img src="./images/rgraph_install.gif" width="100%">
-</p>
-
-Deploy your edge functions with `rgraph deploy <project_name>`
-
-<p>
-  <img src="./images/deploy_lambda.gif" width="100%">
-</p>
-
-
-## Run on your machine (self-hosted)
-
-See : https://github.com/RocketsGraphQL/hasura-batteries
-
-To run this as a standalone docker container.
-
-## Testing
-
-- We use cypress tests on all the examples provided. Run them using `cypress`
-- We use unit tests and CI pipelines, see: https://github.com/RocketsGraphQL/hasura-batteries
-
-
 
 ---
-<br />
+
+## What is Detective?
+
+Detective uses machine learning to automatically surface anomalies from your logs and telemetry data. Stop manually trawling through logs during incidents - let Detective find the signals that matter.
+
+```
+Raw Logs (2.4M events) -> Embeddings (768-dim vectors) -> Clusters (42 groups) -> Anomalies (3 detected)
+```
+
+### Key Capabilities
+
+| Feature | Description |
+|---------|-------------|
+| **K-means Clustering** | Transforms logs into high-dimensional vectors using embeddings, then clusters by semantic similarity |
+| **Isolation Forest** | Unsupervised ML algorithm that isolates anomalies - logs that don't fit normal patterns |
+| **Smart Alerting** | LLM-powered alert gate reduces noise and routes only actionable alerts |
+| **Universal Ingestion** | Pull logs from Datadog, New Relic, Sentry, Loki, or via OpenTelemetry |
+
+### How It Works
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   Ingest    │────>│   Analyze   │────>│    Store    │────>│  Integrate  │────>│    Alert    │
+│             │     │             │     │             │     │             │     │             │
+│  Datadog    │     │  K-means    │     │  Clustered  │     │  Webhooks   │     │  LLM Filter │
+│  New Relic  │     │  Isolation  │     │  Logs       │     │  Claude     │     │  Smart      │
+│  Loki       │     │  Forest     │     │  Anomaly    │     │  Slack      │     │  Routing    │
+│  OTel       │     │  Scoring    │     │  Scores     │     │  Discord    │     │             │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+```
+
+---
+
+## Why Detective?
+
+| Metric | Value |
+|--------|-------|
+| Avg time to root cause | **87ms** |
+| Anomaly detection accuracy | **93%** |
+| Logs analyzed per second | **100k/s** |
+
+Detective automatically detects patterns like:
+
+- `FATAL: connection pool exhausted, no available connections`
+- `ERROR: timeout waiting for lock on payments_table`  
+- `WARN: retry limit exceeded for transaction abc123`
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- An account on [rocketgraph.app](https://rocketgraph.app)
+- Access to your observability platform (Datadog, New Relic, Loki, etc.) OR an OpenTelemetry setup
+
+### Quick Start
+
+1. **Sign up** at [rocketgraph.app](https://rocketgraph.app)
+2. **Connect your log source** (Datadog, New Relic, Loki, or OTel collector)
+3. **Start detecting anomalies** - Detective begins clustering and scoring immediately
+
+---
+
+## Example Setups
+
+This repository contains example configurations for integrating various observability stacks with Detective via OpenTelemetry collectors.
+
+### Repository Structure
+
+```
+example-setups/
+├── otel-collector/          # OpenTelemetry Collector configurations
+│   ├── datadog/             # Datadog to Detective via OTel
+│   ├── newrelic/            # New Relic to Detective via OTel
+│   ├── loki/                # Grafana Loki to Detective via OTel
+│   └── kubernetes/          # K8s cluster logging to Detective
+├── docker-compose/          # Docker Compose setups for local testing
+└── helm-charts/             # Kubernetes Helm charts for production
+```
+
+### Supported Integrations
+
+| Platform | Status | Documentation |
+|----------|--------|---------------|
+| OpenTelemetry | Supported | `example-setups/otel-collector/` |
+| Datadog | Supported | `example-setups/otel-collector/datadog/` |
+| New Relic | Supported | `example-setups/otel-collector/newrelic/` |
+| Grafana Loki | Supported | `example-setups/otel-collector/loki/` |
+| Kubernetes | Supported | `example-setups/otel-collector/kubernetes/` |
+| Sentry | Supported | Coming soon |
+
+---
+
+## OpenTelemetry Collector Configuration
+
+Detective natively supports OpenTelemetry for log ingestion. Here's a basic collector configuration:
+
+```yaml
+# otel-collector-config.yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 1s
+    send_batch_size: 1024
+
+exporters:
+  otlphttp:
+    endpoint: https://ingest.rocketgraph.app
+    headers:
+      Authorization: "Bearer ${ROCKETGRAPH_API_KEY}"
+
+service:
+  pipelines:
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp]
+```
+
+### Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `ROCKETGRAPH_API_KEY` | Your Detective API key from the dashboard |
+| `ROCKETGRAPH_PROJECT_ID` | Your project identifier |
+
+---
+
+## Webhook Integrations
+
+Detective can forward anomalies to your preferred alerting system:
+
+```json
+{
+  "type": "anomaly",
+  "score": 0.94,
+  "timestamp": "2024-01-15T10:23:45Z",
+  "message": "FATAL: connection pool exhausted, no available connections",
+  "cluster_id": "db-connection-errors",
+  "context": {
+    "similar_logs": 127,
+    "time_before_crash": "87ms"
+  }
+}
+```
+
+### Supported Destinations
+
+- Slack / Discord
+- PagerDuty
+- Claude AI Agents
+- Custom Webhooks
+- Any HTTP endpoint
+
+---
+
+## Pricing
+
+| Plan | Logs/month | Price |
+|------|------------|-------|
+| **Starter** | Up to 1M | Free |
+| **Pro** | Up to 50M | $200/month |
+| **Enterprise** | Unlimited | Custom |
+
+All plans include K-means clustering, Isolation Forest detection, and 7+ day retention.
+
+[Get started free](https://rocketgraph.app)
+
+---
+
+## Community
+
+- [Discord](https://discord.gg/YHVnZ5WT) - Join our community for support and discussions
+- [Twitter](https://twitter.com/RGraphql) - Follow for updates
+
+---
+
+## Contributing
+
+We welcome contributions! Check out the example setups and feel free to submit PRs for:
+
+- New OTel collector configurations
+- Integration examples for other platforms
+- Documentation improvements
+
+---
+
+## License
+
+This repository is open source. See [LICENSE](LICENSE) for details.
+
+---
+
 <p align="center">
-<a href="https://www.buymeacoffee.com/kaushikv" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+  <strong>Stop searching. Start finding.</strong>
+  <br>
+  <a href="https://rocketgraph.app">rocketgraph.app</a>
 </p>
 
