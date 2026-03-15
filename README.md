@@ -1,10 +1,6 @@
 <p align="center">
   <a href="https://rocketgraph.app">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="./images/Light.png">
-      <source media="(prefers-color-scheme: light)" srcset="./images/Light.png">
-      <img alt="RocketLogs" src="./images/Light.png" width="280">
-    </picture>
+    <img alt="RocketGraph" src="./images/rocketgraph-logo.png" width="320">
   </a>
 </p>
 
