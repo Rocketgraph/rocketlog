@@ -32,7 +32,7 @@
 ---
 
 <p align="center">
-  <img src="./images/detective.png" alt="Rocketgraph — find the anomaly hiding in your logs" width="820">
+  <img src="./images/logs-snapshot.gif" alt="Rocketgraph ML — 2M logs clustered into 58 templates in 90 seconds" width="820">
 </p>
 
 ## Why?
@@ -86,12 +86,64 @@ Three deterministic algorithms in sequence — no LLM, no hallucination, fully r
 On a real production burst we test against: **2M logs → 58 templates → 9 anomalies, 90 seconds wall-clock, single container.** Full details in [`ml/README.md`](./ml/README.md).
 
 <p align="center">
-  <img src="./images/logs-snapshot.gif" alt="Rocketgraph ML — 2M logs clustered into 58 templates in 90 seconds" width="820">
+  <img src="./images/detective.png" alt="Rocketgraph — find the anomaly hiding in your logs" width="820">
 </p>
 
 ## Examples
 
-[`example-setups/`](./example-setups) contains end-to-end reference apps you can point `otel-node` at to see the whole pipeline working — instrument the service, ship OTLP into your sink, then watch Rocketgraph cluster and flag the logs.
+### Analyse a log file locally — `analyze.py`
+
+The fastest way to see Rocketgraph work: drop a log file in `./logs/`, run one
+command, and get a cluster table with the anomalies flagged. No accounts, no API
+keys, nothing leaves your machine. Add `--ai` for an optional Claude triage on
+top — the engine itself stays deliberately LLM-free and reproducible; the model
+only explains the deterministic clusters.
+
+```bash
+cd example-setups/logfile-quickstart
+
+docker compose up --build -d            # ML engine on http://localhost:9020
+python gen_sample_log.py                # or: cp ~/Downloads/whatever.log ./logs/file.log
+pip install requests                    # anthropic too, if you'll use --ai
+
+python analyze.py                       # table of all clusters
+python analyze.py --anomalies-only      # just the flagged ones
+python analyze.py --ai                  # table + AI triage
+python analyze.py mylogs.log --ai       # a specific file
+```
+
+`analyze.py` auto-detects the file, points the engine at it, pulls the clusters,
+and prints them. ~15,000 raw lines collapse to ~11 structural templates; the
+brand-new "database failover" template — 8 lines, never seen before, error
+level — comes back flagged as an anomaly. No rules written, no labels:
+
+```
+15188 logs → 11 clusters (3 anomalous)
+
+  ANOM SERVICE        LOGS DEPTH  TEMPLATE
+  ----------------------------------------
+   *   payment-svc       8     3  Database failover: replica <*> promoted to primary after ...
+   *   auth-svc       1573     2  Token refreshed for session <NUM>
+       payment-svc    1686        Charge <NUM> authorized for $<FLOAT>
+       ...
+```
+
+**Reading the table:** `ANOM` marks the clusters Isolation Forest flagged; `LOGS`
+is how many raw lines collapsed into that template; `DEPTH` is the isolation
+depth on anomalous clusters (lower = more anomalous); `TEMPLATE` is the
+structural pattern Drain3 mined. The flagged failover cluster is rare *and* new,
+which is exactly what surfaces it.
+
+With `--ai`, the same clusters are handed to Claude for an SRE-style triage —
+likely incident, ranked root-cause hypotheses, and concrete next steps — grounded
+only in the clusters above. Full walkthrough in the
+[log-file quickstart](./example-setups/logfile-quickstart/).
+
+### End-to-end reference apps
+
+[`example-setups/`](./example-setups) also contains reference apps you can point
+`otel-node` at to see the whole pipeline working — instrument the service, ship
+OTLP into your sink, then watch Rocketgraph cluster and flag the logs.
 
 | Example | What it shows |
 | --- | --- |
