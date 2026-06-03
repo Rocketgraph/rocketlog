@@ -78,6 +78,49 @@ array is what you route on — `new_template` → Jira, `error_burst` → page o
 
 ---
 
+## Step 3 — inspect any file with `analyze.py`
+
+`analyze.py` is a one-command wrapper: drop a file in `./logs/`, run it, and get a
+cluster table. It auto-detects the file, points the engine at it, and prints the
+clusters with anomalies flagged. Add `--ai` for an optional Claude triage on top —
+the engine itself stays deliberately LLM-free and reproducible; the model only
+explains the deterministic output.
+
+```bash
+pip install requests                    # anthropic too, if you'll use --ai
+
+cp ~/Downloads/whatever.log ./logs/file.log    # any *.log/*.json/*.ndjson/*.csv
+
+python analyze.py                       # table of all clusters
+python analyze.py --anomalies-only      # just the flagged ones
+python analyze.py --ai                  # table + AI triage
+python analyze.py mylogs.log --ai       # a specific file
+```
+
+The table looks like:
+
+```
+15188 logs → 11 clusters (3 anomalous)
+
+  ANOM SERVICE        LOGS DEPTH  TEMPLATE
+  ----------------------------------------
+   *   payment-svc       8     3  Database failover: replica <*> promoted to primary after ...
+   *   auth-svc       1573     2  Token refreshed for session <NUM>
+       payment-svc    1686        Charge <NUM> authorized for $<FLOAT>
+       ...
+```
+
+Any log file dropped in `./logs/` is detected automatically — `file.log`/`app.log`
+win when several are present, or pass a name. For `--ai`, the `ANTHROPIC_API_KEY`
+is read from the same `../../ml/.env` the engine uses (or `$ANTHROPIC_API_KEY` if
+you'd rather export it); `--anomalies-only` sends just the flagged clusters to
+spend fewer tokens.
+
+> Running the engine locally instead of via Docker? Set `RG_LOGS_MOUNT=$PWD/logs`
+> so the script hands the engine the real file path instead of the `/data` mount.
+
+---
+
 ## Pointing at your own file
 
 Edit `docker-compose.yml`:

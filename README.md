@@ -32,7 +32,7 @@
 ---
 
 <p align="center">
-  <img src="./images/logs-snapshot.gif" alt="Rocketgraph ML — 2M logs clustered into 58 templates in 90 seconds" width="820">
+  <img src="./images/detective.png" alt="Rocketgraph — find the anomaly hiding in your logs" width="820">
 </p>
 
 ## Why?
@@ -84,6 +84,10 @@ Three deterministic algorithms in sequence — no LLM, no hallucination, fully r
 3. **Half-Space-Trees** scores brand-new logs against the trained model in real time.
 
 On a real production burst we test against: **2M logs → 58 templates → 9 anomalies, 90 seconds wall-clock, single container.** Full details in [`ml/README.md`](./ml/README.md).
+
+<p align="center">
+  <img src="./images/logs-snapshot.gif" alt="Rocketgraph ML — 2M logs clustered into 58 templates in 90 seconds" width="820">
+</p>
 
 ## Examples
 
